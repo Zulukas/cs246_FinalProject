@@ -16,11 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import tingle.data.TileSet;
 import tingle.data.TingleDataManager;
-import tingle.gui.popups.ExitConfirmWindow;
 
 /**
  *
@@ -99,7 +100,7 @@ public class Tingle extends JFrame{
     
     private void createTileSelectorScrollPane() {
         tileSelectorScrollPane = new JScrollPane();
-        TileSelector ts = new TileSelector();
+        TileSelector ts = new TileSelector(new TileSet("src\\resources\\minecraft.png"));
         tileSelectorScrollPane.setViewportView(ts);
         tileSelectorScrollPane.add(ts);
     }
@@ -143,13 +144,15 @@ public class Tingle extends JFrame{
      */
     public class ExitAction implements ActionListener {
         @Override
-        public void actionPerformed (ActionEvent e) {
-            ExitConfirmWindow gui = new ExitConfirmWindow(Tingle.this);
-            gui.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            gui.setSize(340, 100);
-            gui.setLocation(300, 300);
-            gui.setVisible(true);
-            gui.setTitle("Tingle Map Editor");
+        public void actionPerformed (ActionEvent e) {        
+            int result = JOptionPane.showConfirmDialog(null, "Do you wish to save before exiting?", "Tingle Data Manager", WIDTH);
+            
+            if (result == 0) {
+                myTingleDataManager.saveFile();
+                System.exit(0);
+            } else if (result == 1) {
+                System.exit(0);
+            }            
         }
     }
     

@@ -5,22 +5,53 @@
  */
 package tingle.data;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 /**
  *
- * @author Kevin
+ * @author Dallin
  */
 public class TileSet {
+    private BufferedImage image;
+    private int tileHeight;
+    private int tileWidth;
 
-    public Object getImage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setImage(BufferedImage image) {
+        this.image = image;
     }
 
-    public int getTileWidth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setTileHeight(int tileHeight) {
+        this.tileHeight = tileHeight;
+    }
+
+    public void setTileWidth(int tileWidth) {
+        this.tileWidth = tileWidth;
+    }
+
+    public BufferedImage getImage() {
+        return image;
     }
 
     public int getTileHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return tileHeight;
+    }
+
+    public int getTileWidth() {
+        return tileWidth;
     }
     
+    public TileSet( String fileName){
+        tileHeight = 32;
+        tileWidth= 32;
+        try{
+            image = ImageIO.read(new File(fileName));
+        } catch (IOException ex) {
+            
+        }
+    }
 }

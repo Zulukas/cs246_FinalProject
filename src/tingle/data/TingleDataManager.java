@@ -44,7 +44,10 @@ public class TingleDataManager {
      */
 
     public TingleDataManager() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mapTiles = new ArrayList<>();
+        tileGraphics = new ArrayList<>();
+        mapWidth = 32;
+        mapHeight = 32;
     }
 
     public int getMapWidth() {
