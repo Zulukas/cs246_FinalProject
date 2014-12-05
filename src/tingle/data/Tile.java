@@ -19,7 +19,7 @@ public class Tile {
      * @param coordinates
      * @param properties 
      */
-    public Tile(Coordinates coordinates, int properties) {
+    public Tile(Coordinates coordinates, int properties, BufferedImage image) {
         if (coordinates == null) {
             tileCoordinates = new Coordinates(-1, -1);
         } else {
@@ -27,6 +27,7 @@ public class Tile {
         }
         
         this.tileProperties = properties;
+        this.image = image;
     }
 
     public BufferedImage getImage() {

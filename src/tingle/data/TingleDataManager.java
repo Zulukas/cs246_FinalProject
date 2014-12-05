@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 
 /**
  * The TingleDataManager class will hold information relevant to the GUI.
@@ -24,6 +25,7 @@ public class TingleDataManager {
     private File mapFile = null;          //The file of the map
     private int mapWidth;
     private int mapHeight;
+    private List<TileSet> simpleTiles;
 
     /**
      * TingleDataManager constructor builds from a map file.
@@ -33,7 +35,20 @@ public class TingleDataManager {
     public TingleDataManager(File fileIn) {
         this.mapFile = fileIn;
         mapTiles = new ArrayList<>();
-        tileGraphics = new ArrayList<>();
+        tileGraphics = new ArrayList<>();   
+        
+        try {
+        mapTiles.add(new Tile(new Coordinates(0,0), 0, ImageIO.read(new File("src\\resources\\simpletiles\\red.png"))));
+        mapTiles.add(new Tile(new Coordinates(0,0), 0, ImageIO.read(new File("src\\resources\\simpletiles\\orange.png"))));
+        mapTiles.add(new Tile(new Coordinates(0,0), 0, ImageIO.read(new File("src\\resources\\simpletiles\\black.png"))));
+        mapTiles.add(new Tile(new Coordinates(0,0), 0, ImageIO.read(new File("src\\resources\\simpletiles\\blue.png"))));
+        mapTiles.add(new Tile(new Coordinates(0,0), 0, ImageIO.read(new File("src\\resources\\simpletiles\\brown.png"))));
+        mapTiles.add(new Tile(new Coordinates(0,0), 0, ImageIO.read(new File("src\\resources\\simpletiles\\pink.png"))));
+        mapTiles.add(new Tile(new Coordinates(0,0), 0, ImageIO.read(new File("src\\resources\\simpletiles\\purple.png"))));
+        mapTiles.add(new Tile(new Coordinates(0,0), 0, ImageIO.read(new File("src\\resources\\simpletiles\\white.png"))));
+        } catch (Exception e) {
+            
+        }
     }
     /*
      public TingleDataManager() {
@@ -102,7 +117,7 @@ public class TingleDataManager {
             while (currentLine != null) {
                 String[] mainParts = currentLine.split("[,:]");
                 checkFormatting(counter, currentLine, mainParts);
-                Tile newTile = new Tile(new Coordinates(Integer.parseInt(mainParts[0]), Integer.parseInt(mainParts[1])), Integer.parseInt(mainParts[2]));
+                Tile newTile = new Tile(new Coordinates(Integer.parseInt(mainParts[0]), Integer.parseInt(mainParts[1])), Integer.parseInt(mainParts[2]), null);
                 mapTiles.add(newTile);
 
                 currentLine = reader.readLine();

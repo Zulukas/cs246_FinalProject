@@ -111,7 +111,16 @@ public class Tingle extends JFrame{
     private void run() {
         initializeFrame();
         createMenuBar();
-        createTileSelectorScrollPane();
+        //createTileSelectorScrollPane();
+               
+        JScrollPane scroll = new JScrollPane(new ObjectPane(new File("src\\resources\\bacon.jpg"), true));
+
+        //scroll.getViewport().add(new MapGridGUI(new TileSet("src\\resources\\bacon.jpg")), null);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        frame.add(scroll);
+        frame.setLocationRelativeTo(menuBar);
     }
     
     /**
