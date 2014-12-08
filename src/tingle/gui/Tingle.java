@@ -5,8 +5,9 @@
  */
 package tingle.gui;
 
+import java.awt.Color;
 import tingle.gui.popups.AboutWindow;
-import java.awt.FlowLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -17,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -47,10 +49,11 @@ public class Tingle extends JFrame{
     private void initializeFrame() {
         frame = new JFrame("Menu");
         
-        setLayout(new FlowLayout());
+        frame.setLayout(null);
         
         frame.setVisible(true);
-        frame.setExtendedState(frame.MAXIMIZED_BOTH);
+        //frame.setExtendedState(frame.MAXIMIZED_BOTH);
+        frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Tingle Map Editor");
     }
@@ -113,14 +116,23 @@ public class Tingle extends JFrame{
         createMenuBar();
         //createTileSelectorScrollPane();
                
-        JScrollPane scroll = new JScrollPane(new ObjectPane(new File("src\\resources\\bacon.jpg"), true));
-
-        //scroll.getViewport().add(new MapGridGUI(new TileSet("src\\resources\\bacon.jpg")), null);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        JScrollPane MapGridScroll = new JScrollPane(new ObjectPane(new File("src\\resources\\bacon.jpg"), true));
+        JScrollPane TileSelectorScroll = new JScrollPane(new ObjectPane(new File("src\\resources\\bacon.jpg"), false));
+        JPanel PropertiesPanel = new JPanel();
         
-        frame.add(scroll);
+        MapGridScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        MapGridScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        frame.add(MapGridScroll);
+        frame.add(PropertiesPanel);
+        
+        MapGridScroll.setBounds(new Rectangle(10, 10, 765, 290));
+        PropertiesPanel.setBounds(new Rectangle(10, 310, 350, 220));
+        PropertiesPanel.setBackground(Color.red);
+        
         frame.setLocationRelativeTo(menuBar);
+        frame.add(TileSelectorScroll);
+        //TileSelectorScroll.setBounds(new Rectangle(800, 300));
     }
     
     /**
