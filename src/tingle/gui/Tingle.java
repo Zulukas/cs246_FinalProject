@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import tingle.data.TileSet;
@@ -31,7 +33,7 @@ import tingle.data.TingleDataManager;
  */
 public class Tingle extends JFrame{
     //BEGIN GUI MEMBERS
-    private JFrame frame;
+    public JFrame frame;
     private JMenuBar menuBar;
     private JScrollPane tileSelectorScrollPane;
     
@@ -108,27 +110,38 @@ public class Tingle extends JFrame{
         tileSelectorScrollPane.add(ts);
     }
     
+    private void createPropertiesBox() {
+        PropertiesBox PropBox = new PropertiesBox();
+        JPanel propertiesBox = PropBox.getPanel();
+        
+        propertiesBox.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        frame.add(propertiesBox);
+        
+        propertiesBox.setBounds(new Rectangle(10, 310, 350, 220));
+        //propertiesBox.setBackground(Color.red);  //USE ME TO TEST BORDERS
+    }
+    
     /**
      * Runs the GUI
      */
     private void run() {
         initializeFrame();
         createMenuBar();
+        createPropertiesBox();
         //createTileSelectorScrollPane();
                
         JScrollPane MapGridScroll = new JScrollPane(new ObjectPane(new File("src\\resources\\bacon.jpg"), true));
         JScrollPane TileSelectorScroll = new JScrollPane(new ObjectPane(new File("src\\resources\\bacon.jpg"), false));
-        JPanel PropertiesPanel = new JPanel();
         
         MapGridScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         MapGridScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         
         frame.add(MapGridScroll);
-        frame.add(PropertiesPanel);
+        
+        JPanel p =new JPanel();
+        p.setBorder(new EmptyBorder(10, 10, 10, 10) );
         
         MapGridScroll.setBounds(new Rectangle(10, 10, 765, 290));
-        PropertiesPanel.setBounds(new Rectangle(10, 310, 350, 220));
-        PropertiesPanel.setBackground(Color.red);
         
         frame.setLocationRelativeTo(menuBar);
         frame.add(TileSelectorScroll);
