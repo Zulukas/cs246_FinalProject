@@ -94,17 +94,18 @@ public class BitmaskHandler {
      * @return 
      */
     private int encodeProperties() {
-        mask = 0;                
-        int i = 1;
-                
+        mask = 0;  //Reset mask              
+        int i = 30; //Initialize a down counter
+        
+        //Encode the properties...
         for (Boolean item : decodedMask) {
-            if (item) {
-                int power = power(2, i);
-                mask += power;
-                i++;
+            if (item) { //If the item is true...
+                int power = power(2, i);    //Get the bit value...               
+                mask += power;  //Add it on
             }
             
-        }
+            i--;
+        }     
         
         return mask;
     }
@@ -117,20 +118,20 @@ public class BitmaskHandler {
      * @return ArrayList of Booleans
      */
     private ArrayList<Boolean> decodeProperties() {
-        if (hasBeenDecoded == false) {            
-            decodedMask = new ArrayList<>();    
+        if (hasBeenDecoded == false) { //If this mask has not been decoded 
+            decodedMask = new ArrayList<>(); //Initialize a new list    
 
-            for (int i = 31; i <= 1; i--) {            
-                int power = power(2, i);
-
-                if ((mask & power) != 0) {
+            for (int i = 30; i >= 0; i--) { //Decode the mask
+                int power = power(2, i);    //Grab the bit value
+                
+                if ((mask & power) != 0) { //Add on true or false appropriately
                     decodedMask.add(true);
                 } else {
                     decodedMask.add(false);
                 }
             }
 
-            hasBeenDecoded = true;
+            hasBeenDecoded = true; //Set the flag
             return decodedMask;    
         } else {
             return decodedMask;
