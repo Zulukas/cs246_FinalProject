@@ -7,10 +7,10 @@ package tingle.gui;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -20,11 +20,14 @@ public class PropertiesBox {
     private JLabel label;
     private ArrayList<JCheckBox> boxes;
     private JPanel panel;
+    private JScrollPane scrollPane;
     
     public PropertiesBox () {
         label = new JLabel("Properties");
         boxes = new ArrayList<>();
-        panel = new JPanel();        
+        panel = new JPanel();
+        scrollPane = new JScrollPane();
+        
         
         for (int i = 0; i < 10; i++) {
             JCheckBox temp = new JCheckBox();
@@ -37,6 +40,7 @@ public class PropertiesBox {
             
             boxes.add(temp);
             panel.add(temp);
+            scrollPane.add(temp);
         }        
     }
     
@@ -107,6 +111,20 @@ public class PropertiesBox {
      */
     public void setPanel(JPanel panel) {
         this.panel = panel;
+    }
+
+    /**
+     * @return the scrollPane
+     */
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    /**
+     * @param scrollPane the scrollPane to set
+     */
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
     }
     
 }

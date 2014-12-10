@@ -5,13 +5,11 @@
  */
 package tingle.gui;
 
-import java.awt.Color;
 import tingle.gui.popups.AboutWindow;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,6 +34,7 @@ public class Tingle extends JFrame{
     public JFrame frame;
     private JMenuBar menuBar;
     private JScrollPane tileSelectorScrollPane;
+    private JScrollPane propertiesBox;
     
     //BEGIN DATA MEMBERS
     public static TingleDataManager myTingleDataManager;
@@ -103,6 +102,9 @@ public class Tingle extends JFrame{
         saveAsFile.addActionListener(new SaveAsFileAction());
     }
     
+    /**
+     * Creates the tileSelector scroll pane and adds it to the JFrame.
+     */
     private void createTileSelectorScrollPane() {
         tileSelectorScrollPane = new JScrollPane();
         TileSelector ts = new TileSelector(new TileSet("src\\resources\\minecraft.png"));
@@ -110,15 +112,18 @@ public class Tingle extends JFrame{
         tileSelectorScrollPane.add(ts);
     }
     
+    /**
+     * Creates the PropertiesBox and adds it to the JFrame.
+     */
     private void createPropertiesBox() {
-        PropertiesBox PropBox = new PropertiesBox();
-        JPanel propertiesBox = PropBox.getPanel();
+        PropertiesBoxPanel pbp = new PropertiesBoxPanel();
+        propertiesBox = new JScrollPane(pbp);
         
-        propertiesBox.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        propertiesBox.setViewportView(pbp);
+        
         frame.add(propertiesBox);
-        
         propertiesBox.setBounds(new Rectangle(10, 310, 350, 220));
-        //propertiesBox.setBackground(Color.red);  //USE ME TO TEST BORDERS
+        
     }
     
     /**
